@@ -47,6 +47,7 @@ pub async fn run_event_loop(
     for m in store.thread_messages(DEFAULT_THREAD) {
         let _ = app.emit("new_post", &m);
     }
+    println!("[{name}] event loop に入ります");  // loop の直前
 
     loop {
         select! {

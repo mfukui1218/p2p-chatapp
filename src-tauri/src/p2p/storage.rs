@@ -7,7 +7,7 @@ pub struct Store {
 
 impl Store {
     pub fn open(node_name: &str) -> rusqlite::Result<Self> {
-        let path = format!("data/{node_name}.db");
+        let path = format!("/tmp/bbs_{node_name}.db");
         let conn = Connection::open(path)?;
         conn.execute(
             "CREATE TABLE IF NOT EXISTS messages (
@@ -68,6 +68,7 @@ impl Store {
         out
     }
 
+    #[allow(dead_code)]
     pub fn len(&self) -> usize {
         self.conn
             .query_row("SELECT COUNT(*) FROM messages", [], |r| r.get::<_, i64>(0))

@@ -33,7 +33,7 @@ pub fn run() {
             tokio::spawn(run_event_loop(
                 handle,
                 rx,
-                "node1".to_string(),
+                std::env::var("NODE_NAME").unwrap_or_else(|_| "node1".to_string()),
                 None,
             ));
             Ok(())
